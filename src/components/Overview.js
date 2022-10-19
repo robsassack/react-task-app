@@ -4,7 +4,7 @@ const Overview = (props) => {
   const {tasks} = props;
 
   return (
-    <div>
+    <div className='tasks'>
       {tasks.map((task, index) => {
         return <p key={task.id}>{index+1}. {task.text}</p>;
       })}
