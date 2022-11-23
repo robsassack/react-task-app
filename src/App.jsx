@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
-import Overview from './components/Overview';
-import uniqid from 'uniqid';
-import './App.css';
+import React, { Component } from "react";
+import Overview from "./components/Overview";
+import uniqid from "uniqid";
+import "./App.css";
 
 class App extends Component {
   constructor() {
@@ -9,8 +9,9 @@ class App extends Component {
 
     this.state = {
       task: {
-        text: '',
-        id: uniqid()
+        index: 0,
+        text: "",
+        id: uniqid(),
       },
       tasks: [],
     };
@@ -19,9 +20,10 @@ class App extends Component {
   handleChange = (e) => {
     this.setState({
       task: {
+        index: this.state.task.index,
         text: e.target.value,
         id: this.state.task.id,
-      }
+      },
     });
   };
 
@@ -30,7 +32,8 @@ class App extends Component {
     this.setState({
       tasks: this.state.tasks.concat(this.state.task),
       task: {
-        text: '',
+        index: this.state.task.index + 1,
+        text: "",
         id: uniqid(),
       },
     });
@@ -42,18 +45,18 @@ class App extends Component {
     return (
       <div>
         <form onSubmit={this.onSubmitTask}>
-          <label htmlFor="taskInput">Enter task</label>
+          <label htmlFor='taskInput'>Enter task</label>
           <input
-            type="text"
-            id="taskInput"
             onChange={this.handleChange}
             value={task.text}
+            type='text'
+            id='taskInput'
           />
-          <button type="submit">Add task</button>
+          <button type='submit'>Add Task</button>
         </form>
         <Overview tasks={tasks} />
       </div>
-    )
+    );
   }
 }
 
