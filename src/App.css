@@ -19,3 +19,8 @@ input {
   margin: 10px;
   gap: 5px;
 }
+
+.task {
+  display: flex;
+  gap: 5px;
+}

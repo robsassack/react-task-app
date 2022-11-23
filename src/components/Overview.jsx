@@ -1,12 +1,20 @@
 import React from "react";
+import uniqid from "uniqid";
 
 const Overview = (props) => {
-  const { tasks } = props;
+  const { tasks, deleteTask } = props;
 
   return (
-    <div className="tasks">
+    <div className='tasks'>
       {tasks.map((task) => {
-        return <p key={task.id}>{task.index}. {task.text}</p>;
+        return (
+          <div className="task" key={task.id}>
+            <p>
+              {task.index}. {task.text}
+            </p>
+            <button onClick={() => deleteTask(task.id)}><i className="fa-solid fa-trash"></i></button>
+          </div>
+        );
       })}
     </div>
   );

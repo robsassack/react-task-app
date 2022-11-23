@@ -39,6 +39,29 @@ class App extends Component {
     });
   };
 
+  deleteTask = (id) => {
+    let newTasks = [];
+    let taskDeleted = false;
+    this.state.tasks.forEach((task) => {
+      if (task.id === id) {
+        taskDeleted = true;
+      } else {
+        if (taskDeleted) {
+          task.index -= 1;
+        }
+        newTasks.push(task);
+      }
+    });
+    this.setState({
+      tasks: newTasks,
+      task: {
+        index: this.state.task.index - 1,
+        text: "",
+        id: this.state.task.id,
+      },
+    });
+  }
+
   render() {
     const { task, tasks } = this.state;
 
@@ -54,7 +77,7 @@ class App extends Component {
           />
           <button type='submit'>Add Task</button>
         </form>
-        <Overview tasks={tasks} />
+        <Overview tasks={tasks} deleteTask={this.deleteTask} />
       </div>
     );
   }
