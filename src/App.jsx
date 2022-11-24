@@ -12,6 +12,7 @@ class App extends Component {
         index: 0,
         text: "",
         id: uniqid(),
+        edit: false,
       },
       tasks: [],
     };
@@ -23,6 +24,7 @@ class App extends Component {
         index: this.state.task.index,
         text: e.target.value,
         id: this.state.task.id,
+        edit: false,
       },
     });
   };
@@ -35,6 +37,7 @@ class App extends Component {
         index: this.state.task.index + 1,
         text: "",
         id: uniqid(),
+        edit: false,
       },
     });
   };
@@ -58,9 +61,36 @@ class App extends Component {
         index: this.state.task.index - 1,
         text: "",
         id: this.state.task.id,
+        edit: false,
       },
     });
-  }
+  };
+
+  editTask = (id) => {
+    let newTasks = [];
+    this.state.tasks.forEach((task) => {
+      if (task.id === id) {
+        task.edit = !task.edit;
+      }
+      newTasks.push(task);
+    });
+    this.setState({
+      tasks: newTasks,
+    });
+  };
+
+  handleEditTask = (e, id) => {
+    let newTasks = [];
+    this.state.tasks.forEach((task) => {
+      if (task.id === id) {
+        task.text = e.target.value;
+      }
+      newTasks.push(task);
+    });
+    this.setState({
+      tasks: newTasks,
+    });
+  };
 
   render() {
     const { task, tasks } = this.state;
@@ -77,7 +107,12 @@ class App extends Component {
           />
           <button type='submit'>Add Task</button>
         </form>
-        <Overview tasks={tasks} deleteTask={this.deleteTask} />
+        <Overview
+          tasks={tasks}
+          deleteTask={this.deleteTask}
+          editTask={this.editTask}
+          handleEditTask={this.handleEditTask}
+        />
       </div>
     );
   }
